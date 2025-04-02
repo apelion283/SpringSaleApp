@@ -1,13 +1,13 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Trang Chu</title>
+        <title>Trang Chủ</title>
     <th:block th:replace="base :: styles"></th:block>
 </head>
 <div th:replace="base :: header"></div>
 <body>
     <main class="container">
-        <form action="/action_page.php">
+        <form th:action="@{/}">
             <div class="mb-3 mt-3">
                 <input type="text" class="form-control" placeholder="Nhập từ khóa..." name="kw">
             </div>
@@ -21,29 +21,31 @@
             </div>
             <button type="submit" class="btn btn-primary mt-2 mb-2">Tìm kiếm</button>
         </form>
-        <table class="table table-hover table-bordered ">
+        
+        <a th:href="@{/products}" class="btn btn-success mt-1">Thêm Sản Phẩm</a>
+        
+        <table class="table table-hover table-bordered mt-2 ">
             <thead>
                 <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Email</th>
+                    <th></th>
+                    <th>ID</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Giá Sản Phẩm</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>John</td>
-                    <td>Doe</td>
-                    <td>john@example.com</td>
-                </tr>
-                <tr>
-                    <td>Mary</td>
-                    <td>Moe</td>
-                    <td>mary@example.com</td>
-                </tr>
-                <tr>
-                    <td>July</td>
-                    <td>Dooley</td>
-                    <td>july@example.com</td>
+                <tr th:each="p:${products}">
+                    <td>
+                        <img th:src="${p.image}" width="200"/>
+                    </td>
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.name}"></td>
+                    <td th:text="${p.price + 'VNĐ'}"></td>
+                    <td>
+                        <a th:href="@{'/products/' + ${p.id}}" class="btn btn-info">Cập Nhật</a>
+                        <button class="btn btn-danger">Xóa</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
