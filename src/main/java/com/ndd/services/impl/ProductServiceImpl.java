@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService{
     
     @Autowired
-    ProductRepository prodRepo;
+    private ProductRepository prodRepo;
 
     @Override
     public List<Product> getProducts(Map<String, String> params) {
@@ -33,13 +33,14 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void deleteProduct(int id) {
-        this.prodRepo.deleteProduct(id);
-    }
-
-    @Override
     public Product addOrUpdate(Product p) {
         return this.prodRepo.addOrUpdate(p);
     }
+
+    @Override
+    public void deleteProduct(int id) {
+        this.prodRepo.deleteProduct(id);
+    }
+    
     
 }
