@@ -47,8 +47,8 @@ public class SaleOrder implements Serializable {
     private Date createdDate;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne
-    private User userId;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
+    private User user;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private Set<OrderDetail> orderDetailSet;
 
     public SaleOrder() {
@@ -79,12 +79,12 @@ public class SaleOrder implements Serializable {
         this.createdDate = createdDate;
     }
 
-    public User getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<OrderDetail> getOrderDetailSet() {

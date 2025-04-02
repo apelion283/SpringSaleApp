@@ -36,10 +36,10 @@ public class ProdTag implements Serializable {
     private Integer id;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Product productId;
+    private Product product;
     @JoinColumn(name = "tag_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private Tag tagId;
+    private Tag tag;
 
     public ProdTag() {
     }
@@ -56,20 +56,20 @@ public class ProdTag implements Serializable {
         this.id = id;
     }
 
-    public Product getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Product productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public Tag getTagId() {
-        return tagId;
+        return tag;
     }
 
     public void setTagId(Tag tagId) {
-        this.tagId = tagId;
+        this.tag = tagId;
     }
 
     @Override

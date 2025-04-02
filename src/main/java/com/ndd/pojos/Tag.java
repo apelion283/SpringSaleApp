@@ -42,7 +42,7 @@ public class Tag implements Serializable {
     private String name;
     @Column(name = "tagcol")
     private String tagcol;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tagId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tag")
     private Set<ProdTag> prodTagSet;
 
     public Tag() {

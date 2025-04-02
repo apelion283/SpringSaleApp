@@ -69,9 +69,9 @@ public class User implements Serializable {
     private String userRole;
     @Column(name = "avatar")
     private String avatar;
-    @OneToMany(mappedBy = "userId")
+    @OneToMany(mappedBy = "user")
     private Set<SaleOrder> saleOrderSet;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Comment> commentSet;
 
     public User() {
