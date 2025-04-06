@@ -9,27 +9,34 @@
 <body>
     <main class="container">
         <h1 class="text-center text-info mt-1">Quản Trị Sản Phẩm</h1>
-        <form method="post" action="@{/add}" th:object="${product}">
+        <form method="post" th:action="@{/add}" th:object="${product}" enctype="multipart/form-data">
             <div class="mb-3 mt-3">
                 <label for="name">Tên Sản Phẩm</label>
                 <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Tên Sản Phẩm"/>
+            </div>
+            <div class="mb-3 mt-3">
                 <label for="price">Giá Sản Phẩm</label>
                 <input type="number" th:field="*{price}" class="form-control" id="price" placeholder="Giá Sản Phẩm"/>
-                <div class="mt-3 mb-3">
-                    <label for="cat">Danh mục sản phẩm</label>
-                    <select th:field="*{category}" class="form-select" id="cat">
-                        <option th:each="c:${categories}" th:text="${c.name}" th:value="${c.id}"></option>
-                    </select>
-                </div>  
             </div>
             <div class="mt-3 mb-3">
-                
+                <label for="cat" class="form-label">Danh mục sản phẩm</label>
+                <select th:field="*{category}" class="form-select" id="cat">
+                    <option th:each="c: ${categories}" th:text="${c.name}" th:value="${c.id}"></option>
+                </select>
+            </div>  
+            <div class="mb-3 mt-3">
+                <label class="form-label">Ảnh Sản Phẩm</label>
+                <input type="file" th:field="*{file}" class="form-control"/>
+                <img th:src="*{image}" width="200" th:if="*{id != null}"/>
+            </div>
+            <div class="mt-3 mb-3">
+
                 <input type="hidden" th:field="*{id}"/>
                 <input type="hidden" th:field="*{image}"/>
-                
+
                 <button class="btn btn-info">
                     <span th:if="*{id == null}">Thêm sản phẩm</span>
-                    <span th:unless="*{id== null}">Cập nhật sản phẩm</span>
+                    <span th:unless="*{id == null}">Cập nhật sản phẩm</span>
                 </button>
             </div>
         </form>

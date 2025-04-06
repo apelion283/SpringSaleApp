@@ -32,6 +32,7 @@ public class ProductController {
     @PostMapping("/add")
     public String create(@ModelAttribute(value = "product") Product p){
         this.prodsService.addOrUpdate(p);
+       
         return "redirect:/";
     }
     
