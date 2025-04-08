@@ -4,6 +4,7 @@
  */
 package com.ndd.pojos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -69,8 +70,10 @@ public class User implements Serializable {
     private String userRole;
     @Column(name = "avatar")
     private String avatar;
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<SaleOrder> saleOrderSet;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Comment> commentSet;
 
