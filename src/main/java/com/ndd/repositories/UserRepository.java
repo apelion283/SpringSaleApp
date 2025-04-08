@@ -12,4 +12,5 @@ import com.ndd.pojos.User;
  */
 public interface UserRepository {
     User getUserByUsername(String username);
+    User register(User user);
 }
