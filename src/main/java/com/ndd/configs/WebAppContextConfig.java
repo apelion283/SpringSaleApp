@@ -4,8 +4,6 @@
  */
 package com.ndd.configs;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.ndd.formatters.CategoryFormatter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -55,14 +53,5 @@ public class WebAppContextConfig implements WebMvcConfigurer {
         return new StandardServletMultipartResolver();
     }
 
-    @Bean
-    public Cloudinary cloudinary() {
-        Cloudinary cloudinary
-                = new Cloudinary(ObjectUtils.asMap(
-                        "cloud_name", "dslbgvdao",
-                        "api_key", "387533457698857",
-                        "api_secret", "9-sWBT9kuC0j-0CAvM4EqUvb21Q",
-                        "secure", true));
-        return cloudinary;
-    }
+    
 }

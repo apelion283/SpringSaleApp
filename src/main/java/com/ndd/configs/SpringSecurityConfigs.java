@@ -4,11 +4,14 @@
  */
 package com.ndd.configs;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -21,6 +24,7 @@ import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
  */
 @Configuration
 @EnableTransactionManagement
+@EnableWebSecurity
 @ComponentScan(basePackages = {
     "com.ndd.controllers",
     "com.ndd.repositories",
@@ -31,6 +35,7 @@ public class SpringSecurityConfigs {
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -42,17 +47,28 @@ public class SpringSecurityConfigs {
     }
 
     @Bean
+    public Cloudinary cloudinary() {
+        Cloudinary cloudinary
+                = new Cloudinary(ObjectUtils.asMap(
+                        "cloud_name", "dslbgvdao",
+                        "api_key", "387533457698857",
+                        "api_secret", "9-sWBT9kuC0j-0CAvM4EqUvb21Q",
+                        "secure", true));
+        return cloudinary;
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws
             Exception {
         http.csrf(c -> c.disable()).authorizeHttpRequests(requests
-                -> requests.requestMatchers("/").authenticated())
-                        .formLogin(form -> form.loginPage("/login")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/login?error=true").permitAll())
-                        .logout(logout
-                                -> logout.logoutSuccessUrl("/login").permitAll());
+                -> requests.requestMatchers("/").authenticated().requestMatchers("/api/**").permitAll())
+                .formLogin(form -> form.loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/", true)
+                .failureUrl("/login?error=true").permitAll())
+                .logout(logout
+                        -> logout.logoutSuccessUrl("/login").permitAll());
         return http.build();
     }
-
+    
 }
