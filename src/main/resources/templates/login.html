@@ -12,11 +12,11 @@
         <form method="post" th:action="@{/login}">
             <div class="mb-3 mt-3">
                 <label for="username">Tên Đăng Nhập</label>
-                <input type="text" class="form-control" id="username" placeholder="Tên Đăng Nhập" required/>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Tên Đăng Nhập" required/>
             </div>
             <div class="mb-3 mt-3">
                 <label for="password">Mật Khẩu</label>
-                <input type="password" class="form-control" id="password" placeholder="Mật Khẩu" required/>
+                <input type="password" class="form-control" name="password" id="password" placeholder="Mật Khẩu" required/>
             </div>
             <div class="mt-3 mb-3">
                 <button class="btn btn-info">
